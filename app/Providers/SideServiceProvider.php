@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\User;
 
+
+
+
 class SideServiceProvider extends ServiceProvider
 {
     /**
