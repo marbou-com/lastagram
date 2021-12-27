@@ -10,6 +10,7 @@ use App\User;
 
 class SideServiceProvider extends ServiceProvider
 {
+    
     /**
      * Register services.
      *
