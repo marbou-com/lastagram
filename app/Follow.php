@@ -9,8 +9,8 @@ class Follow extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'from_user_id',
-        'to_user_id',
+        'from_follow_id',
+        'to_follow_id',
         'is_follow',
     ];
 
