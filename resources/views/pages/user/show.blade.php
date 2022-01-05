@@ -16,7 +16,26 @@
 
             <h1 class="profile-user-name">{{ $user->name }}</h1>
 
-            <button class="m-btn" btn-type="follow">フォロー</button>
+
+            @if(!$isFollow)
+              <!---->
+              <form action="{{route('follows.store')}}" method="POST">
+                @csrf
+                <input type="hidden" name="to_follow_id" value="{{ $user->id }}">
+                <input type="hidden" name="is_follow" value="1">
+                <button class="m-btn" btn-type="follow" type="submit">フォロー</button>
+
+              </form>
+            @else
+              <form action="{{route('follows.destroy' , ['follow'=>$user->id])}}" method="POST">
+                @csrf
+                @method('delete')
+                <input type="hidden" name="to_follow_id" value="{{ $user->id }}">
+                <input type="hidden" name="is_follow" value="0">
+                <button class="m-btn" btn-type="follow" type="submit">フォローはずす</button>
+
+              </form>
+            @endif
 
             <button aria-label="profile settings" class="btn profile-settings-btn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               <i class="fas fa-cog"></i>
@@ -40,8 +59,8 @@
 
             <ul>
               <li><span class="profile-stat-count">{{ count($user->posts) }}</span> 投稿</li>
-              <li><span class="profile-stat-count">188</span> フォロワー</li>
-              <li><span class="profile-stat-count">200</span> フォロー</li>
+              <li><span class="profile-stat-count">{{ $fCnt_t }}</span> フォロワー</li>
+              <li><span class="profile-stat-count">{{ $fCnt_f }}</span> フォロー</li>
             </ul>
 
           </div>

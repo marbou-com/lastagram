@@ -44,8 +44,8 @@
 
             <ul>
               <li><span class="profile-stat-count">{{ count($user->posts) }}</span> 投稿</li>
-              <li><span class="profile-stat-count">188</span> フォロワー</li>
-              <li><span class="profile-stat-count">206</span> フォロー</li>
+              <li><span class="profile-stat-count">{{ $fCnt_t }}</span> フォロワー</li>
+              <li><span class="profile-stat-count">{{ $fCnt_f }}</span> フォロー</li>
             </ul>
 
           </div>

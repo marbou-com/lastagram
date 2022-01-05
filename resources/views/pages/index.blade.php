@@ -85,9 +85,16 @@
             </div>
 
             @if(count($post->likes)>0)
+            @php
+             //dd($posts);   
+            @endphp
             <div class="like-count">
                 <i class="fas fa-heart"></i>
                 <p>{{ count($post->likes) }} 人がいいね</p>
+
+
+
+
             </div>
             @endif
 

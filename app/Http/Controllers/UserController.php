@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;//バリデーション
 
 use App\User;
+use App\Follow;
 
 class UserController extends Controller
 {
@@ -54,11 +55,36 @@ class UserController extends Controller
             $user=User::where('id',$id)->first();
             $user->load('posts', 'posts.likes', 'posts.comments');
             //dd($user);
-            return view('pages.user.me', compact('user'));//自分
+
+            $Follows_t=Follow::where('to_follow_id',$id)->get();//されている人数
+            $fCnt_t=count($Follows_t);
+
+            $Follows_f=Follow::where('from_follow_id',$id)->get();//している人数
+            $fCnt_f=count($Follows_f);
+
+            return view('pages.user.me', compact('user'))
+            ->with([ 'fCnt_t' => $fCnt_t, 'fCnt_f' => $fCnt_f]);//自分
+
+
+
         }else{
             $user=User::where('id',$id)->first();
             $user->load('posts', 'posts.likes', 'posts.comments');
-            return view('pages.user.show', compact('user'));//他の人
+
+            $isFollow=Follow::where('to_follow_id',$id)
+                          ->where('from_follow_id',\Auth::user()->id)->exists();//フォローしているか
+
+            $Follows_t=Follow::where('to_follow_id',$id)->get();//されている人数
+            $fCnt_t=count($Follows_t);
+
+            $Follows_f=Follow::where('from_follow_id',$id)->get();//している人数
+            $fCnt_f=count($Follows_f);
+
+            //dd($isFollow);
+            return view('pages.user.show', compact('user'))
+            ->with(['isFollow'=>$isFollow, 'fCnt_t' => $fCnt_t, 'fCnt_f' => $fCnt_f]);
+            
+            //他の人
         }
         //$user->load('');
         //dd($user);

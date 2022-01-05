@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function () {//認証された人だけ�
 
     Route::resource('likes', 'LikeController')->only(['store', 'destroy']);//｜理解
 
+    Route::resource('follows' ,'FollowController')->only(['store', 'destroy']);
+
     //Route::resource('tags', 'TagController');//｜理解
 
      Route::get('posts/create', function () {
