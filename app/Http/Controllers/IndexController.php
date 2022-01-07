@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     public function index(){
         $posts=Post::latest()->get();
-        $posts->load('user', 'comments.user', 'likes', 'tags', 'comments.tags',);//｜理解（投稿した人、コメントとコメント書いた人）
+        $posts->load('user', 'comments.user', 'likes.user', 'tags', 'comments.tags',);//｜理解（投稿した人、コメントとコメント書いた人）
         //dd($posts->like_id);
         //dd($posts);
         

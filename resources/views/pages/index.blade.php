@@ -69,9 +69,11 @@
             </div>
 
 
-             <!--説明-->
+             <!--自分説明-->
              <div class="comments">
-                <p><i class="far fa-comment-alt"></i>&nbsp;{{ $post->description }}</p>
+                <p>
+                    <img style="width:3%" src="{{ asset('storage/images/img/'.$post->user->logo_url) }}">
+                    &nbsp;{{ $post->description }}</p>
             </div>           
 
 
@@ -91,7 +93,9 @@
             <div class="like-count">
                 <i class="fas fa-heart"></i>
                 <p>{{ count($post->likes) }} 人がいいね</p>
-
+                @foreach($post->likes as $like)
+                    <img src="{{ asset('storage/images/img/'.$like->user->logo_url) }}">
+                @endforeach
 
 
 
@@ -107,9 +111,10 @@
                 @foreach($post->comments as $comment)
                 <div class="comments">
                     <p>
-                        <i class="far fa-comment"></i>&nbsp;<span class="user-name">{{ $comment->user->name }}</span>
-                    {{ $comment->description }}
-                </p>
+                        <img src="{{ asset('storage/images/img/'.$comment->user->logo_url) }}" style="width: 3%;">&nbsp;
+                        <span class="user-name">{{ $comment->user->name }}</span>
+                        {{ $comment->description }}
+                    </p>
                 </div>
                 @endforeach
 
